@@ -7,6 +7,7 @@ interface FormData {
   question: string;
   question_ar: string;
   q_type: string;
+  img_url: string
 }
 
 // Define a props interface for the InputField component
@@ -25,6 +26,7 @@ const UrgentForm: React.FC = () => {
     question: "",
     question_ar: "",
     q_type: "",
+    img_url: ""
   });
 
   // Handle form data change
@@ -41,7 +43,7 @@ const UrgentForm: React.FC = () => {
     event: React.FormEvent<HTMLFormElement>
   ): Promise<void> => {
     event.preventDefault(); // Prevent default form submission
-
+  
     // Send data to the server
     try {
       const response = await fetch(
@@ -54,25 +56,37 @@ const UrgentForm: React.FC = () => {
           body: JSON.stringify(formData),
         }
       );
-
+  
       if (!response.ok) {
         throw new Error(`HTTP error! Status: ${response.status}`); // Handle HTTP errors
       }
-
+  
       // Only parse JSON if the response has content
       const contentType = response.headers.get("content-type");
       if (contentType && contentType.includes("application/json")) {
         const result = await response.json();
+        alert(result.message || "Answer submitted"); // Display success alert
         console.log("Response from server:", result);
+  
+        // Reset the form data after successful submission
+        setFormData({
+          arrangement: "",
+          question: "",
+          question_ar: "",
+          q_type: "",
+          img_url: "",
+        });
       } else {
         console.log("No JSON returned from response");
       }
     } catch (error) {
       console.error("Error sending form data:", error);
+      alert("Failed to submit the answer."); // Optionally alert the user of an error
     }
   };
-  return (
-    <form onSubmit={handleSubmit}>
+    return (
+    <form onSubmit={handleSubmit} className="p-10">
+      <h1 className="text-3xl font-bold">RIASEC Assessment Data Entry</h1>
       <div className="space-y-12">
         <div className="border-b border-gray-900/10 pb-12">
           <div className="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
@@ -85,24 +99,31 @@ const UrgentForm: React.FC = () => {
               onChange={handleChange}
             />
             <InputField
-              label="English Question"
+              label="Occupation"
               type="text"
               name="question"
               value={formData.question}
               onChange={handleChange}
             />
             <InputField
-              label="Arabic Question"
+              label="Occupation in Arabic"
               type="text"
               name="question_ar"
               value={formData.question_ar}
               onChange={handleChange}
             />
             <InputField
-              label="Type Question"
+              label="Question Type (R - I - A - S - E - C)"
               type="text"
               name="q_type"
               value={formData.q_type}
+              onChange={handleChange}
+            />
+            <InputField
+              label="Image URL"
+              type="text"
+              name="img_url"
+              value={formData.img_url}
               onChange={handleChange}
             />
             <div className="sm:col-span-4">

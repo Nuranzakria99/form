@@ -40,7 +40,7 @@ const UrgentForm2: React.FC = () => {
   // Handle form submission
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>): Promise<void> => {
     event.preventDefault(); // Prevent default form behavior
-
+  
     try {
       const response = await fetch('http://localhost:3000/api/assessment/fetch/ms', {
         method: 'POST',
@@ -49,26 +49,37 @@ const UrgentForm2: React.FC = () => {
         },
         body: JSON.stringify(formData)
       });
-
+  
       if (!response.ok) {
         throw new Error(`HTTP error! Status: ${response.status}`);
       }
-
+  
       // Optional: Parse JSON response only if response contains JSON
       const contentType = response.headers.get('content-type');
       if (contentType && contentType.includes('application/json')) {
         const result = await response.json();
+        alert(result.message || "Question submitted"); // Display an alert with the server message
         console.log('Response from server:', result);
       } else {
         console.log('No JSON returned from response');
       }
+  
+      // Reset the form data
+      setFormData({
+        arrangment: '',
+        question: '',
+        question_ar: '',
+        description: '',
+        description_ar: ''
+      });
     } catch (error) {
       console.error('Error sending form data:', error);
     }
   };
-
+  
   return (
-    <form onSubmit={handleSubmit}>
+    <form onSubmit={handleSubmit} className="p-10">
+      <h1 className="text-3xl font-bold">Motivational Skills Assessment Data Entry</h1>
       <div className="space-y-12">
         <div className="border-b border-gray-900/10 pb-12">
           <div className="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">

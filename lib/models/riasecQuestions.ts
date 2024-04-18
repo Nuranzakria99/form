@@ -7,6 +7,7 @@ const riasecQuestions = new Schema(
         question: String,
         question_ar: String,
         q_type: String,
+        img_url: String
     }
 );
 
