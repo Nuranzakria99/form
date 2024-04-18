@@ -1,0 +1,48 @@
+{
+  "version": "5",
+  "dialect": "pg",
+  "entries": [
+    {
+      "idx": 0,
+      "version": "5",
+      "when": 1710956929452,
+      "tag": "0000_elite_vance_astro",
+      "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "5",
+      "when": 1711018382560,
+      "tag": "0001_ancient_fat_cobra",
+      "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "5",
+      "when": 1711027256865,
+      "tag": "0002_yielding_living_tribunal",
+      "breakpoints": true
+    },
+    {
+      "idx": 3,
+      "version": "5",
+      "when": 1711031053857,
+      "tag": "0003_lush_freak",
+      "breakpoints": true
+    },
+    {
+      "idx": 4,
+      "version": "5",
+      "when": 1711031199646,
+      "tag": "0004_slippery_zarda",
+      "breakpoints": true
+    },
+    {
+      "idx": 5,
+      "version": "5",
+      "when": 1711389368566,
+      "tag": "0005_wakeful_true_believers",
+      "breakpoints": true
+    }
+  ]
+}
