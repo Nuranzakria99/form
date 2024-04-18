@@ -10,8 +10,8 @@ export async function GET(req: NextRequest) {
 }
 
 export async function POST(req: NextRequest){
-    const { arrangement, question, question_ar, q_type } = await req.json();
+    const { arrangement, question, question_ar, q_type, img_url } = await req.json();
     await connectMongoDB();
-    await RiasecQuestions.create({ arrangement, question, question_ar, q_type });
+    await RiasecQuestions.create({ arrangement, question, question_ar, q_type, img_url });
     return NextResponse.json({ message: "Answer submitted" }, { status: 201 });
 }
